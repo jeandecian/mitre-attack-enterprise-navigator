@@ -1,4 +1,4 @@
-import json, os, requests
+import json, os, requests, sys
 
 ENCODING = 'utf-8'
 ENTERPRISE_ATTACK_JSON_FILE = 'enterprise-attack.json'
@@ -39,3 +39,5 @@ def get_techniques(term):
 
     for t in techniques:
         print(f"[ {t.get('id').ljust(9, ' ')} ] {t.get('name').ljust(75, ' ')} ({t.get('url')})")
+
+get_techniques(sys.argv[1])
