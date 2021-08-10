@@ -22,7 +22,7 @@ def get_techniques(term):
         for data in enterprise_attack_json.get('objects'):
             is_attack_pattern = data.get('type') == 'attack-pattern'
             is_deprecated = data.get('x_mitre_deprecated', False)
-            is_in_description = term in data.get('description', '')
+            is_in_description = term.lower() in data.get('description', '').lower()
             
             external_references = data.get('external_references', [{}])[0]
             external_url = external_references.get('url', '')
