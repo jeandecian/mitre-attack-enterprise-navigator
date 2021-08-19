@@ -1,4 +1,4 @@
-import json, os, requests, sys
+import json, os, re, requests, sys
 
 ENCODING = 'utf-8'
 ENTERPRISE_ATTACK_JSON_FILE = 'enterprise-attack.json'
@@ -22,7 +22,7 @@ def get_techniques(term):
         for data in enterprise_attack_json.get('objects'):
             is_attack_pattern = data.get('type') == 'attack-pattern'
             is_deprecated = data.get('x_mitre_deprecated', False)
-            is_in_description = term.lower() in data.get('description', '').lower()
+            is_in_description = re.search(term.lower(), data.get('description', '').lower())
             
             external_references = data.get('external_references', [{}])[0]
             external_url = external_references.get('url', '')
